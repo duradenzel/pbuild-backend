@@ -15,3 +15,4 @@ C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.pdb
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.genruntimeconfig.cache
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\ref\pbuild-data.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.sourcelink.json

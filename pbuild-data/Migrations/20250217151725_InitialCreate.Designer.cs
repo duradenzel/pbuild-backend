@@ -11,7 +11,7 @@ using pbuild_data.Database;
 namespace pbuild_data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250217143847_InitialCreate")]
+    [Migration("20250217151725_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -37,6 +37,10 @@ namespace pbuild_data.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("longtext");
 

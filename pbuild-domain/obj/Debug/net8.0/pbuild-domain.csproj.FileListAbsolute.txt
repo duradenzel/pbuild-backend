@@ -9,3 +9,4 @@ C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-domain\obj\Debug\net8.0\refint\pbuild-domain.dll
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-domain\obj\Debug\net8.0\pbuild-domain.pdb
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-domain\obj\Debug\net8.0\ref\pbuild-domain.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-domain\obj\Debug\net8.0\pbuild-domain.sourcelink.json
