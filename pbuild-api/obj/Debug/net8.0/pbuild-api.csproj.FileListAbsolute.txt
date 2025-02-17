@@ -144,3 +144,7 @@ C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-api\obj\Debug\net8.0\pbuild-api.sourcelink.json
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-api\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-api\bin\Debug\net8.0\DevOne.Security.Cryptography.BCrypt.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-api\bin\Debug\net8.0\BCrypt.Net-Next.dll

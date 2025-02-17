@@ -16,5 +16,10 @@ namespace pbuild_business.Services
         {
             return _userRepository.GetUserById(id);
         }
+
+        public User GetUserByEmail(string email)
+        {
+            return _userRepository.GetUserByEmail(email);
+        }
     }
 }
