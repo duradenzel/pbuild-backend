@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "3FeLEbgFESu0XlOXUaZtIM96vBKXXzwYg7gfK3OACq4=",
+  "Source": "pbuild-api",
+  "BasePath": "_content/pbuild-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,17 @@
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\bin\Debug\net8.0\pbuild-data.deps.json
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\bin\Debug\net8.0\pbuild-data.runtimeconfig.json
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\bin\Debug\net8.0\pbuild-data.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\bin\Debug\net8.0\pbuild-data.pdb
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\bin\Debug\net8.0\pbuild-domain.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\bin\Debug\net8.0\pbuild-domain.pdb
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.csproj.AssemblyReference.cache
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.AssemblyInfoInputs.cache
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.AssemblyInfo.cs
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.csproj.CoreCompileInputs.cache
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-d.6135A459.Up2Date
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\refint\pbuild-data.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.pdb
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\pbuild-data.genruntimeconfig.cache
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-data\obj\Debug\net8.0\ref\pbuild-data.dll
