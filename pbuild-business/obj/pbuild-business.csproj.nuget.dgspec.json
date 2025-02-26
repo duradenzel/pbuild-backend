@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj": {
-                "projectPath": "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj"
+              "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj": {
+                "projectPath": "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj"
               },
               "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-domain\\pbuild-domain.csproj": {
                 "projectPath": "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-domain\\pbuild-domain.csproj"
@@ -77,14 +77,14 @@
         }
       }
     },
-    "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj": {
+    "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj",
+        "projectUniqueName": "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj",
         "projectName": "pbuild-data",
-        "projectPath": "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj",
+        "projectPath": "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj",
         "packagesPath": "C:\\Users\\Huijb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\obj\\",
+        "outputPath": "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Huijb\\AppData\\Roaming\\NuGet\\NuGet.Config",

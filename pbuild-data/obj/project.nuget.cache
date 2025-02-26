@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rTBGa6+k2VI=",
+  "dgSpecHash": "jePL3oBOS/o=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj",
+  "projectFilePath": "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Huijb\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Huijb\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

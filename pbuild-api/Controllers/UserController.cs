@@ -22,7 +22,6 @@ namespace pbuild_api.Controllers
             _authService = authService;
         }
 
-        // GET: api/user/{id}
         [HttpGet("{id}")]
         public ActionResult<User> GetUserById(int id)
         {
@@ -69,7 +68,7 @@ namespace pbuild_api.Controllers
                 Name = request.Name,
                 Email = request.Email,
                 Password = hashedPassword,
-                Role = "User" // Default role
+                Role = "User" 
             };
 
             _authService.CreateUser(newUser);

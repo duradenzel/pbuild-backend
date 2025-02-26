@@ -10,7 +10,20 @@ namespace pbuild_data.Database
         {
         }
 
-        public DbSet<User> Users { get; set; } 
+        public DbSet<User> Users { get; set; }
+        public DbSet<Pokemon> Pokemons { get; set; } 
+        public DbSet<Team> Teams { get; set; }  
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<Team>()
+                .HasMany(t => t.Pokemons)
+                .WithOne(p => p.Team)
+                .HasForeignKey(p => p.TeamId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
 
     }
 }

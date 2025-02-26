@@ -2914,8 +2914,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj": {
-              "projectPath": "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj"
+            "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj": {
+              "projectPath": "c:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-data\\pbuild-data.csproj"
             },
             "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-domain\\pbuild-domain.csproj": {
               "projectPath": "C:\\Users\\Huijb\\OneDrive\\Bureaublad\\Fontys\\Semester 3 Deel 2\\Individueel Project\\pbuild-backend\\pbuild-domain\\pbuild-domain.csproj"
