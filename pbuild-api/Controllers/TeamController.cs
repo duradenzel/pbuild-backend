@@ -59,7 +59,7 @@ namespace PBuild.Api.Controllers
         }
 
         [HttpGet("{teamId}")]
-        public async Task<IActionResult> GetTeam(int teamId)
+        public async Task<IActionResult> GetTeamByIdAsync(int teamId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))

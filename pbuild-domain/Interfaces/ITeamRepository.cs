@@ -1,6 +1,6 @@
 using pbuild_domain.Entities;
 
-namespace pbuild_data.Repositories
+namespace pbuild_domain.Interfaces
 {
     public interface ITeamRepository
     {

@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using pbuild_business.Services;
 using pbuild_data.Database;
 using pbuild_data.Repositories;
-
-
+using pbuild_domain.Interfaces;
+using pbuild_business.Factories;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IRepositoryFactory, RepositoryFactory>();
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<UserService>();

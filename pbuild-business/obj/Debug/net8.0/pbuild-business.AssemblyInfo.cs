@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("pbuild-business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3144745951e0efb4c0485a042560209f382cedca")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ede187599769e3d64afa8db82f3ce4210926a112")]
 [assembly: System.Reflection.AssemblyProductAttribute("pbuild-business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("pbuild-business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

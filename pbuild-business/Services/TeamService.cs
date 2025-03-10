@@ -1,31 +1,37 @@
 using pbuild_domain.Entities;
-using pbuild_data.Repositories;
+using pbuild_domain.Interfaces;
+using pbuild_business.Factories;
 
+using pbuild_data.Repositories;
 
 namespace pbuild_business.Services
 {
     public class TeamService
     {
-        private readonly ITeamRepository _teamRepository;
+        private readonly IRepositoryFactory _repositoryFactory;
+        //private readonly ITeamRepository _teamRepository;
 
-        public TeamService(ITeamRepository teamRepository)
+        public TeamService(IRepositoryFactory repositoryFactory)
         {
-            _teamRepository = teamRepository;
+            _repositoryFactory = repositoryFactory;
         }
 
         public async Task<Team> SaveTeamAsync(Team team)
         {
-            return await _teamRepository.SaveTeamAsync(team);
+            var teamRepository = _repositoryFactory.CreateRepository<ITeamRepository>();
+            return await teamRepository.SaveTeamAsync(team);
         }
 
         public async Task<List<Team>> GetTeamsAsync()
         {
-            return await _teamRepository.GetTeamsAsync();
+            var teamRepository = _repositoryFactory.CreateRepository<ITeamRepository>();
+            return await teamRepository.GetTeamsAsync();
         }
 
         public async Task<Team> GetTeamByIdAsync(int teamId)
         {
-            Team selectedTeam = await _teamRepository.GetTeamByIdAsync(teamId);
+            var teamRepository = _repositoryFactory.CreateRepository<ITeamRepository>();
+            Team selectedTeam = await teamRepository.GetTeamByIdAsync(teamId);
             return selectedTeam;
         }
     
