@@ -22,16 +22,13 @@ jobs:
       - name: Build and run tests in Docker
         run: |
           docker build --target build --tag pbuild-backend .
-          docker run --rm pbuild-backend
-
-      - name: Install SonarQube Scanner
-        run: |
-          docker run --rm pbuild-backend dotnet tool install --global dotnet-sonarscanner
-
+          
       - name: Run SonarQube analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           docker run --rm pbuild-backend dotnet-sonarscanner begin /k:"duradenzel_pbuild-backend" /o:"duradenzel" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          
           docker run --rm pbuild-backend dotnet build
+          
           docker run --rm pbuild-backend dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
