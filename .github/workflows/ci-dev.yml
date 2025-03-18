@@ -22,15 +22,11 @@ jobs:
       - name: Build and run tests in Docker
         run: |
           docker build --target build --tag pbuild-backend .
-          docker run --rm pbuild-backend dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --results-directory /app/TestResults
+          docker run --rm pbuild-backend
 
-      - name: List Test Results directory (Debugging step)
-        run: |
-          ls -R /app/TestResults
-
-      - name: Upload coverage results to Coveralls
-        uses: coverallsapp/github-action@v2
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
         with:
-          path-to-lcov: ./TestResults/coverage.lcov 
+          file: ./TestResults/coverage.lcov  # Path to the coverage file
         env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}  # Use the Codecov token from GitHub secrets
