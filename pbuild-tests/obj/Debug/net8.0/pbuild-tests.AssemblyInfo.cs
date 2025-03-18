@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("pbuild-tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2aa8f38b39fdf4c573935636cb040789443498a9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46e25b0cb6a4818d158fc910a7ccc48c7fba5da0")]
 [assembly: System.Reflection.AssemblyProductAttribute("pbuild-tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("pbuild-tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
