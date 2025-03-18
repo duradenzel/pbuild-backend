@@ -50,7 +50,8 @@ ipch/
 *.ncb
 *.opensdf
 *.sdf
-
+*.dll
+*.dlls
 # Visual Studio profiler
 *.psess
 *.vsp
