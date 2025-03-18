@@ -6,8 +6,6 @@ RUN dotnet restore
 RUN dotnet build --configuration Release --no-restore
 RUN dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
 
-RUN dotnet tool install --global coveralls.io
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 WORKDIR /app
