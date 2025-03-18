@@ -11,8 +11,8 @@ using pbuild_data.Database;
 namespace pbuild_data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250217143847_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250217172247_AddUserCreatedRole")]
+    partial class AddUserCreatedRole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,14 @@ namespace pbuild_data.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("longtext");
 
