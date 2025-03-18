@@ -31,3 +31,4 @@ jobs:
         run: |
           docker build --target build --tag pbuild-backend .
           docker run --rm pbuild-backend dotnet test --no-build --configuration Release
+
