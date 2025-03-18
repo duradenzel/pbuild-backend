@@ -4,6 +4,7 @@ WORKDIR /app
 COPY . . 
 
 RUN dotnet tool install --global dotnet-sonarscanner
+ENV PATH="${PATH}:/root/.dotnet/tools"
 
 RUN dotnet restore
 RUN dotnet build --configuration Release --no-restore
