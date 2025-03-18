@@ -1,9 +1,9 @@
-name: CI - Run Tests on Dev Branch
+name: CI - Docker Build & Tests on Dev Branch
 
 on:
   push:
     branches:
-      - dev  
+      - dev 
 
 jobs:
   build-and-test:
@@ -13,16 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x' 
+      - name: Build Docker Image
+        run: docker build -t pbuild-backend .
 
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build project
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Run unit tests
-        run: dotnet test --no-build --configuration Release --verbosity normal
+      - name: Run Unit Tests Inside Docker
+        run: docker run --rm pbuild-backend dotnet test --no-build --configuration Release --verbosity normal
