@@ -4,7 +4,9 @@ WORKDIR /app
 COPY . . 
 RUN dotnet restore
 RUN dotnet build --configuration Release --no-restore
-RUN dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --results-directory /app/TestResults
+
+RUN dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
+RUN ls -R /app/TestResults
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
