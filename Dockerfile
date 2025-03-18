@@ -8,9 +8,10 @@ COPY pbuild-data/*.csproj pbuild-data/
 COPY pbuild-domain/*.csproj pbuild-domain/  
 COPY pbuild-tests/*.csproj pbuild-tests/  
 
-RUN dotnet restore
+
 
 COPY . .
+RUN dotnet restore
 RUN dotnet build --configuration Release --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
