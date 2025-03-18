@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-COPY pbuild-backend.sln .  
+COPY pbuild.sln .  
 COPY pbuild-api/*.csproj pbuild-api/  
 COPY pbuild-business/*.csproj pbuild-business/  
 COPY pbuild-data/*.csproj pbuild-data/  
