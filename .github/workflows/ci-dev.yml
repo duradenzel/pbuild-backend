@@ -9,7 +9,7 @@ on:
       - dev
 
 jobs:
-  build-and-test:
+  build-and-analyze:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,8 +24,14 @@ jobs:
           docker build --target build --tag pbuild-backend .
           docker run --rm pbuild-backend
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          file: ./TestResults/*/coverage.cobertura.xml
-          token: ${{ secrets.CODECOV_TOKEN }}  
+      - name: Install SonarQube Scanner
+        run: |
+          docker run --rm pbuild-backend dotnet tool install --global dotnet-sonarscanner
+
+      - name: Run SonarQube analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          docker run --rm pbuild-backend dotnet-sonarscanner begin /k:"duradenzel_pbuild-backend" /o:"duradenzel" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          docker run --rm pbuild-backend dotnet build
+          docker run --rm pbuild-backend dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
