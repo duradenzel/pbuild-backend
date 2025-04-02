@@ -46,8 +46,7 @@ namespace pbuild_data.Repositories
 
         public async Task<Team> UpdateTeamAsync(int teamId, Team updatedTeam)
         {
-            var existingTeam = await _context.Teams.Include(t => t.Pokemons)
-                                                .FirstOrDefaultAsync(t => t.Id == teamId);
+            var existingTeam = await _context.Teams.Include(t => t.Pokemons).FirstOrDefaultAsync(t => t.Id == teamId);
 
             if (existingTeam == null)
             {
