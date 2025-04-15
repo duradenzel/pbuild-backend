@@ -31,7 +31,7 @@ namespace pbuild_tests.Services
             var userId = 1;
             var email = "huijbers15@outlook.com";
 
-            var expectedUser = new User { Id = 1, Name = "Existing User", Password = "admin", Email = email, Role = "Admin" };
+            var expectedUser = new User { Id = 1, Name = "Denzel", Password = "admin", Email = email, Role = "Admin" };
 
             _mockUserRepository
                 .Setup(repo => repo.GetUserById(userId))
@@ -63,7 +63,7 @@ namespace pbuild_tests.Services
         public void GetUserByEmail_ShouldReturnUser_WhenEmailExists()
         {
             var email = "huijbers15@outlook.com";
-            var expectedUser = new User { Id = 1, Name = "Existing User", Password = "admin", Email = email, Role = "Admin" };
+            var expectedUser = new User { Id = 1, Name = "Denzel", Password = "admin", Email = email, Role = "Admin" };
 
             _mockUserRepository
                 .Setup(repo => repo.GetUserByEmail(email))
@@ -78,7 +78,7 @@ namespace pbuild_tests.Services
         [Fact]
         public void GetUserByEmail_ShouldReturnNull_WhenEmailDoesNotExist()
         {
-            var email = "nonexistent@example.com";
+            var email = "test@haha.com";
 
             _mockUserRepository
                 .Setup(repo => repo.GetUserByEmail(email))

@@ -27,6 +27,9 @@ namespace PBuild.Api.Controllers
                 Console.WriteLine($"Received Token: {token}");
 
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+
+                //??? Kijk naar DTO's, dit zou nooit voor moeten komen :)
                 if (string.IsNullOrEmpty(userId))
                 {
                     return Unauthorized();
