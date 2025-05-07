@@ -1,36 +1,27 @@
-# Stage 1: Build and test
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /src
 
-# Copy and restore dependencies
-COPY *.sln ./
-COPY pbuild-api/*.csproj ./pbuild-api/
-COPY pbuild-api.Tests/*.csproj ./pbuild-api.Tests/
-RUN dotnet restore
+# Copy solution and all source files
+COPY . .
 
-# Copy the entire project and test sources
-COPY . . 
+# Install tools for test coverage
+RUN dotnet tool install --global dotnet-sonarscanner
+ENV PATH="${PATH}:/root/.dotnet/tools"
 
-# Build the app
-RUN dotnet build --configuration Release --no-restore
+# Restore and build the solution
+RUN dotnet restore pbuild.sln
+RUN dotnet build pbuild.sln --configuration Release --no-restore
 
 # Run tests with code coverage
 RUN dotnet test pbuild-tests/pbuild-tests.csproj \
     --no-build --configuration Release \
+    --logger "trx;LogFileName=test_results.trx" \
     /p:CollectCoverage=true \
-    /p:CoverletOutputFormat=cobertura \
-    /p:CoverletOutput=TestResults/
+    /p:CoverletOutput=TestResults/ \
+    /p:CoverletOutputFormat=cobertura
 
-# Publish the app
-RUN dotnet publish pbuild-api/pbuild-api.csproj \
-    --configuration Release \
-    --output /app/publish
-
-# Stage 2: Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
-
 WORKDIR /app
-COPY --from=build /app/publish .
-
+COPY --from=build /src/pbuild-api/bin/Release/net8.0/ . 
 ENTRYPOINT ["dotnet", "pbuild-api.dll"]
