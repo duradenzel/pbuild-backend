@@ -60,6 +60,7 @@ namespace pbuild_data.Repositories
             
             foreach (var pokemon in updatedTeam.Pokemons)
             {
+                pokemon.Id = 0; // have to search for a solution for this in the frontend. i dont think this is ideal
                 pokemon.TeamId = teamId;
                 _context.Pokemons.Add(pokemon);
                 existingTeam.Pokemons.Add(pokemon);
