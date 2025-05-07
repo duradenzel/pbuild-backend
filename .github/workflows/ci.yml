@@ -30,7 +30,7 @@ jobs:
         run: |
           dotnet test pbuild-tests/pbuild-tests.csproj \
             --no-build --configuration Release \
-            --logger "trx;LogFileName=TestResults/coverage.trx" \
+            --logger "trx;LogFileName=coverage.trx" \
             /p:CollectCoverage=true \
             /p:CoverletOutput=./ \
             /p:CoverletOutputFormat=cobertura
