@@ -43,5 +43,47 @@ namespace pbuild_data.Repositories
                 .Include(t => t.Pokemons)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<Team> UpdateTeamAsync(int teamId, Team updatedTeam)
+        {
+            var existingTeam = await _context.Teams.Include(t => t.Pokemons).FirstOrDefaultAsync(t => t.Id == teamId);
+
+            if (existingTeam == null)
+            {
+                return null;
+            }
+
+            existingTeam.Name = updatedTeam.Name;
+            
+            _context.Pokemons.RemoveRange(existingTeam.Pokemons);
+            existingTeam.Pokemons.Clear();
+            
+            foreach (var pokemon in updatedTeam.Pokemons)
+            {
+                pokemon.Id = 0; // have to search for a solution for this in the frontend. i dont think this is ideal
+                pokemon.TeamId = teamId;
+                _context.Pokemons.Add(pokemon);
+                existingTeam.Pokemons.Add(pokemon);
+            }
+
+            await _context.SaveChangesAsync();
+            return existingTeam;
+        }
+
+        public async Task<bool> DeleteTeamAsync(int teamId)
+        {
+            var team = await _context.Teams.Include(t => t.Pokemons).FirstOrDefaultAsync(t => t.Id == teamId);
+            
+            if (team == null)
+            {
+                return false;
+            }
+
+            _context.Pokemons.RemoveRange(team.Pokemons);
+            _context.Teams.Remove(team);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
     }
 }

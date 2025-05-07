@@ -12,6 +12,14 @@ namespace pbuild_domain.Entities
     public int Id { get; set; }
     public required string Name { get; set; }
 
+    public int HP { get; set; }
+
+    public int Attack { get; set; }
+    public int Defense { get; set; }
+    public int Speed { get; set; }
+    public int SP_Attack { get; set; }
+    public int SP_Defense { get; set; }
+
     [ForeignKey("Team")]
     public int TeamId { get; set; }
 
