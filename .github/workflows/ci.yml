@@ -29,8 +29,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         dotnet-sonarscanner begin \
-          /k:"your-org_key:your-project-key" \
-          /o:"your-org-key" \
+          /k:"duradenzel:pbuild-backend" \
+          /o:"duradenzel" \
           /d:sonar.login="${SONAR_TOKEN}" \
           /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/*.opencover.xml"
 
