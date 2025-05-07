@@ -1,27 +1,37 @@
+# Build Stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-WORKDIR /src
+WORKDIR /app
 
-# Copy solution and all source files
+# Copy the entire repo to the container
 COPY . .
 
-# Install tools for test coverage
+# Install .NET tools
 RUN dotnet tool install --global dotnet-sonarscanner
+
+# Make sure the path to tools is available
 ENV PATH="${PATH}:/root/.dotnet/tools"
 
-# Restore and build the solution
-RUN dotnet restore pbuild.sln
+# Restore dependencies
+RUN dotnet restore pbuild.sln  # Restore the solution from the root
+
+# Build the application
 RUN dotnet build pbuild.sln --configuration Release --no-restore
 
-# Run tests with code coverage
-RUN dotnet test pbuild-tests/pbuild-tests.csproj \
-    --no-build --configuration Release \
-    --logger "trx;LogFileName=test_results.trx" \
-    /p:CollectCoverage=true \
-    /p:CoverletOutput=TestResults/ \
-    /p:CoverletOutputFormat=cobertura
+# Run tests and collect code coverage
+RUN dotnet test pbuild-tests/pbuild-tests.csproj --no-build --configuration Release \
+  --collect:"XPlat Code Coverage" --results-directory /app/TestResults
 
+# Publish the app for production
+RUN dotnet publish pbuild-api/pbuild-api.csproj --configuration Release --no-build --output /app/publish
+
+# Runtime Stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
 WORKDIR /app
-COPY --from=build /src/pbuild-api/bin/Release/net8.0/ . 
+
+# Copy published files from the build stage
+COPY --from=build /app/publish .
+
+# Set the entrypoint to run the application
 ENTRYPOINT ["dotnet", "pbuild-api.dll"]

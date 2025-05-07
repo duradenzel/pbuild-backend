@@ -21,13 +21,13 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Restore Dependencies
-        run: dotnet restore pbuild-backend/pbuild.sln
+        run: dotnet restore pbuild.sln  # Correct solution path
 
       - name: Build
-        run: dotnet build pbuild-backend/pbuild.sln --configuration Release --no-restore
+        run: dotnet build pbuild.sln --configuration Release --no-restore  # Correct solution path
 
       - name: Run Tests with Coverage
-        working-directory: pbuild-backend
+        working-directory: ./  # No need to set a specific working directory here
         run: |
           mkdir -p coverage
           dotnet test pbuild-tests/pbuild-tests.csproj \
@@ -41,13 +41,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: pbuild-backend/coverage/test_results.trx
+          path: coverage/test_results.trx
 
       - name: Upload Code Coverage
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
-          path: pbuild-backend/coverage/coverage.cobertura.xml
+          path: coverage/coverage.cobertura.xml
 
   docker:
     name: Docker Build and Push
@@ -66,5 +66,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t yourdockerhubusername/pbuild-api:latest ./pbuild-backend
+          docker build -t yourdockerhubusername/pbuild-api:latest .  # Build in root folder
           docker push yourdockerhubusername/pbuild-api:latest
