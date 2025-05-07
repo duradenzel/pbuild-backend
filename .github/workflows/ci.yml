@@ -13,33 +13,43 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    # Step 1: Checkout code
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # Ensure the entire history is cloned for better analysis relevance
 
+    # Step 2: Install .NET SDK
     - name: Setup .NET SDK 8.0
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0'
 
+    # Step 3: Install SonarScanner tool
     - name: Install SonarScanner tool
       run: dotnet tool install --global dotnet-sonarscanner
 
+    # Step 4: Setup SonarCloud Analysis
     - name: Begin SonarCloud analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         dotnet-sonarscanner begin \
-          /k:"duradenzel:pbuild-backend" \
+          /k:"duradenzel_pbuild-backend" \
           /o:"duradenzel" \
-          /d:sonar.login="${SONAR_TOKEN}" \
-          /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/*.opencover.xml"
+          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
+          /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/*.opencover.xml" \
+          /d:sonar.host.url="https://sonarcloud.io"
 
+    # Step 5: Restore dependencies
     - name: Restore dependencies
       run: dotnet restore pbuild.sln
 
+    # Step 6: Build the solution
     - name: Build the solution
       run: dotnet build pbuild.sln --configuration Release --no-restore
 
+    # Step 7: Run Tests with Code Coverage (output OpenCover format)
     - name: Run tests with OpenCover format code coverage
       run: |
         dotnet test pbuild-tests/pbuild-tests.csproj \
@@ -49,18 +59,22 @@ jobs:
           --logger:"trx;LogFileName=test_results.trx" \
           --results-directory ./TestResults
 
+    # Step 8: End SonarCloud analysis
     - name: End SonarCloud analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        dotnet-sonarscanner end /d:sonar.login="${SONAR_TOKEN}"
+        dotnet-sonarscanner end \
+          /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
+    # Step 9: Upload Test Results
     - name: Upload Test Results
       uses: actions/upload-artifact@v4
       with:
         name: test-results
         path: ./TestResults/**/*.trx
 
+    # Step 10: Upload Code Coverage Report
     - name: Upload Code Coverage Report
       uses: actions/upload-artifact@v4
       with:
