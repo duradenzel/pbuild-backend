@@ -35,14 +35,14 @@ jobs:
           /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/*.opencover.xml"
 
     - name: Restore dependencies
-      run: dotnet restore pbuild-backend/pbuild.sln
+      run: dotnet restore pbuild.sln
 
     - name: Build the solution
-      run: dotnet build pbuild-backend/pbuild.sln --configuration Release --no-restore
+      run: dotnet build pbuild.sln --configuration Release --no-restore
 
     - name: Run tests with OpenCover format code coverage
       run: |
-        dotnet test pbuild-backend/pbuild-tests/pbuild-tests.csproj \
+        dotnet test pbuild-tests/pbuild-tests.csproj \
           --no-build \
           --configuration Release \
           --collect:"XPlat Code Coverage" \
