@@ -2,9 +2,9 @@ name: Build, Test, and Dockerize
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build-and-test:
@@ -66,5 +66,5 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t yourdockerhubusername/pbuild-api:latest .  # Build in root folder
-          docker push yourdockerhubusername/pbuild-api:latest
+          docker build -t lostborders/pbuild-api:latest .  # Build in root folder
+          docker push lostborders/pbuild-api:latest
