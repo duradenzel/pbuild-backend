@@ -1,66 +1,68 @@
-name: Build and Test With Code Coverage
+name: .NET Build and Test with Code Coverage
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - main
   pull_request:
-    branches: [ master ]
+    branches:
+      - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
+    - name: Setup .NET SDK 8.0
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'
 
-      - name: Restore dependencies
-        run: dotnet restore pbuild.sln
+    - name: Install SonarScanner tool
+      run: dotnet tool install --global dotnet-sonarscanner
 
-      - name: Build solution
-        run: dotnet build pbuild.sln --configuration Release --no-restore
+    - name: Begin SonarCloud analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        dotnet-sonarscanner begin \
+          /k:"your-org_key:your-project-key" \
+          /o:"your-org-key" \
+          /d:sonar.login="${SONAR_TOKEN}" \
+          /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/*.opencover.xml"
 
-      - name: Run tests with coverage
-        run: |
-          dotnet test pbuild-tests/pbuild-tests.csproj \
-            --no-build --configuration Release \
-            --collect:"XPlat Code Coverage" \
-            --results-directory pbuild-tests/TestResults \
-            --logger "trx;LogFileName=test_results.trx"
+    - name: Restore dependencies
+      run: dotnet restore pbuild-backend/pbuild.sln
 
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: pbuild-tests/TestResults/test_results.trx
+    - name: Build the solution
+      run: dotnet build pbuild-backend/pbuild.sln --configuration Release --no-restore
 
-      - name: Upload Code Coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: code-coverage-report
-          path: pbuild-tests/TestResults/**/coverage.cobertura.xml
+    - name: Run tests with OpenCover format code coverage
+      run: |
+        dotnet test pbuild-backend/pbuild-tests/pbuild-tests.csproj \
+          --no-build \
+          --configuration Release \
+          --collect:"XPlat Code Coverage" \
+          --logger:"trx;LogFileName=test_results.trx" \
+          --results-directory ./TestResults
 
-          
+    - name: End SonarCloud analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        dotnet-sonarscanner end /d:sonar.login="${SONAR_TOKEN}"
 
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: ./TestResults/**/*.trx
 
-      - name: Install ReportGenerator
-        run: dotnet tool install -g dotnet-reportgenerator-globaltool
-
-      - name: Generate HTML coverage report
-        run: |
-          reportgenerator \
-            -reports:pbuild-tests/TestResults/**/coverage.cobertura.xml \
-            -targetdir:coverage-report-html \
-            -reporttypes:Html
-
-      - name: Upload HTML coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: html-coverage-report
-          path: coverage-report-html
-
+    - name: Upload Code Coverage Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: code-coverage-report
+        path: ./TestResults/**/*.opencover.xml
