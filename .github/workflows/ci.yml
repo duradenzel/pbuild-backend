@@ -2,9 +2,9 @@ name: Build, Test, and Dockerize
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
@@ -29,7 +29,7 @@ jobs:
       - name: Run Tests with Coverage
         working-directory: ./  # No need to set a specific working directory here
         run: |
-          mkdir -p coverage
+          mkdir -p coverage  # Make sure the directory exists
           dotnet test pbuild-tests/pbuild-tests.csproj \
             --no-build --configuration Release \
             --logger "trx;LogFileName=test_results.trx" \
@@ -41,13 +41,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: coverage/test_results.trx
+          path: coverage/test_results.trx  # Explicit path to the test results
 
       - name: Upload Code Coverage
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
-          path: coverage/coverage.cobertura.xml
+          path: coverage/coverage.cobertura.xml  # Explicit path to the coverage file
 
   docker:
     name: Docker Build and Push
