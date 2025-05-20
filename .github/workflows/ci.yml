@@ -11,13 +11,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     # Step 1: Checkout code
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-        fetch-depth: 0  # Ensure the entire history is cloned for better analysis relevance
+        fetch-depth: 0
 
     # Step 2: Install .NET SDK
     - name: Setup .NET SDK 8.0
@@ -29,19 +29,18 @@ jobs:
     - name: Install SonarScanner tool
       run: dotnet tool install --global dotnet-sonarscanner
 
-    # Step 4: Setup SonarCloud Analysis
-
+    # Step 4: Begin SonarCloud analysis
     - name: Begin SonarCloud analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         dotnet-sonarscanner begin \
-        /k:"duradenzel_pbuild-backend" \
-        /o:"duradenzel" \
-        /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
-        /d:sonar.host.url="https://sonarcloud.io" \
-        /d:sonar.cs.cobertura.reportsPaths="**/TestResults/**/*.cobertura.xml"
-
+          /k:"duradenzel_pbuild-backend" \
+          /o:"duradenzel" \
+          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
+          /d:sonar.host.url="https://sonarcloud.io" \
+          /d:sonar.verbose=true \
+          /d:sonar.cs.cobertura.reportsPaths="TestResults/**/coverage.cobertura.xml"
 
     # Step 5: Restore dependencies
     - name: Restore dependencies
@@ -51,25 +50,25 @@ jobs:
     - name: Build the solution
       run: dotnet build pbuild.sln --configuration Release --no-restore
 
-    # Step 7: Run Tests with Code Coverage (output OpenCover format)
-    - name: Run tests with OpenCover format code coverage
+    # Step 7: Run tests with coverage
+    - name: Run tests with code coverage
       run: |
         dotnet test pbuild-tests/pbuild-tests.csproj \
           --no-build \
           --configuration Release \
           --collect:"XPlat Code Coverage" \
           --logger:"trx;LogFileName=test_results.trx" \
-          --results-directory ./TestResults
+          --results-directory TestResults
 
-    - name: Debug, Confirm coverage file
+    # Step 8: (Optional Debug) Show coverage file info
+    - name: Verify coverage file
       run: |
         echo "Looking for coverage file..."
         find . -name 'coverage.cobertura.xml'
         echo "----"
         head -n 20 $(find . -name 'coverage.cobertura.xml' | head -n 1)
 
-
-    # Step 8: End SonarCloud analysis
+    # Step 9: End SonarCloud analysis
     - name: End SonarCloud analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -77,16 +76,16 @@ jobs:
         dotnet-sonarscanner end \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-    # Step 9: Upload Test Results
+    # Step 10: Upload test results
     - name: Upload Test Results
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: ./TestResults/**/*.trx
+        path: TestResults/**/*.trx
 
-    # Step 10: Upload Code Coverage Report
+    # Step 11: Upload code coverage report
     - name: Upload Code Coverage Report
       uses: actions/upload-artifact@v4
       with:
         name: code-coverage-report
-        path: ./TestResults/**/*.opencover.xml
+        path: TestResults/**/coverage.cobertura.xml
