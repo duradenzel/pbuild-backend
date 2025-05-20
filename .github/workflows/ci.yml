@@ -1,91 +1,67 @@
-name: .NET Build and Test with Code Coverage
+name: .NET Build and Test with Coverlet Coverage
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout code
     - name: Checkout code
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
 
-    # Step 2: Install .NET SDK
-    - name: Setup .NET SDK 8.0
+    - name: Setup .NET 8 SDK
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '8.0'
 
-    # Step 3: Install SonarScanner tool
-    - name: Install SonarScanner tool
-      run: dotnet tool install --global dotnet-sonarscanner
+    - name: Install Coverlet
+      run: dotnet tool install --global coverlet.console
 
-    # Step 4: Begin SonarCloud analysis
+    - name: Add tools to PATH
+      run: echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+    - name: Restore dependencies
+      run: dotnet restore pbuild.sln
+
     - name: Begin SonarCloud analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        dotnet-sonarscanner begin \
+        dotnet sonarscanner begin \
           /k:"duradenzel_pbuild-backend" \
           /o:"duradenzel" \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
           /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.verbose=true \
-          /d:sonar.cs.cobertura.reportsPaths="TestResults/**/coverage.cobertura.xml"
+          /d:sonar.cs.opencover.reportsPaths="coverage.xml" \
+          /d:sonar.verbose=true
 
-    # Step 5: Restore dependencies
-    - name: Restore dependencies
-      run: dotnet restore pbuild.sln
+    - name: Build solution
+      run: dotnet build pbuild.sln --configuration Release --no-incremental
 
-    # Step 6: Build the solution
-    - name: Build the solution
-      run: dotnet build pbuild.sln --configuration Release --no-restore
-
-    # Step 7: Run tests with coverage
-    - name: Run tests with code coverage
+    - name: Run tests with Coverlet and collect coverage (OpenCover format)
       run: |
-        dotnet test pbuild-tests/pbuild-tests.csproj \
-          --no-build \
-          --configuration Release \
-          --collect:"XPlat Code Coverage" \
-          --logger:"trx;LogFileName=test_results.trx" \
-          --results-directory TestResults
+        coverlet ./pbuild-tests/bin/Release/net8.0/pbuild-tests.dll \
+          --target "dotnet" \
+          --targetargs "test ./pbuild-tests/pbuild-tests.csproj --no-build --configuration Release" \
+          --format opencover \
+          --output coverage.xml
 
-    # Step 8: (Optional Debug) Show coverage file info
-    - name: Verify coverage file
-      run: |
-        echo "Looking for coverage file..."
-        find . -name 'coverage.cobertura.xml'
-        echo "----"
-        head -n 20 $(find . -name 'coverage.cobertura.xml' | head -n 1)
-
-    # Step 9: End SonarCloud analysis
     - name: End SonarCloud analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        dotnet-sonarscanner end \
+        dotnet sonarscanner end \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-    # Step 10: Upload test results
-    - name: Upload Test Results
+    - name: Upload Coverage Report
       uses: actions/upload-artifact@v4
       with:
-        name: test-results
-        path: TestResults/**/*.trx
-
-    # Step 11: Upload code coverage report
-    - name: Upload Code Coverage Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: code-coverage-report
-        path: TestResults/**/coverage.cobertura.xml
+        name: coverage
+        path: coverage.xml
