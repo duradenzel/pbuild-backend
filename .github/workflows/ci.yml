@@ -30,16 +30,18 @@ jobs:
       run: dotnet tool install --global dotnet-sonarscanner
 
     # Step 4: Setup SonarCloud Analysis
+
     - name: Begin SonarCloud analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         dotnet-sonarscanner begin \
-          /k:"duradenzel_pbuild-backend" \
-          /o:"duradenzel" \
-          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
-          /d:sonar.cs.cobertura.reportsPaths="./**/TestResults/**/coverage.cobertura.xml" \
-          /d:sonar.host.url="https://sonarcloud.io"
+        /k:"duradenzel_pbuild-backend" \
+        /o:"duradenzel" \
+        /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
+        /d:sonar.host.url="https://sonarcloud.io" \
+        /d:sonar.cs.cobertura.reportsPaths="**/TestResults/**/*.cobertura.xml"
+
 
     # Step 5: Restore dependencies
     - name: Restore dependencies
@@ -58,6 +60,14 @@ jobs:
           --collect:"XPlat Code Coverage" \
           --logger:"trx;LogFileName=test_results.trx" \
           --results-directory ./TestResults
+
+    - name: Debug: Confirm coverage file
+      run: |
+        echo "Looking for coverage file..."
+        find . -name 'coverage.cobertura.xml'
+        echo "----"
+        head -n 20 $(find . -name 'coverage.cobertura.xml' | head -n 1)
+
 
     # Step 8: End SonarCloud analysis
     - name: End SonarCloud analysis
