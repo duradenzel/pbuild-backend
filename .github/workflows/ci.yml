@@ -61,7 +61,7 @@ jobs:
           --logger:"trx;LogFileName=test_results.trx" \
           --results-directory ./TestResults
 
-    - name: Debug: Confirm coverage file
+    - name: Debug, Confirm coverage file
       run: |
         echo "Looking for coverage file..."
         find . -name 'coverage.cobertura.xml'
