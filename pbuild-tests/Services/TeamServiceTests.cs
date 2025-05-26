@@ -73,7 +73,7 @@ public class TeamServiceTests
     }
 
 
-//TODO: create new method or update current method to also upate the included pokemon 
+//TODO: create new method or update current method to also upate the included pokemon
     [Fact]
     public async Task UpdateTeamAsync_ShouldReturnUpdatedTeam_WhenUpdateIsSuccessful()
     {
@@ -111,7 +111,7 @@ public class TeamServiceTests
     [Fact]
     public async Task SaveTeamAsync_ShouldThrowException_WhenRepositoryIsUnavailable()
     {
-        var team = new Team { Id = 1, Name = "shuoldnt work" };
+        var team = new Team { Id = 1, Name = "shouldnt work" };
         var repositoryFactory = new Mock<IRepositoryFactory>();
         repositoryFactory.Setup(f => f.CreateRepository<ITeamRepository>())
                      .Throws(new InvalidOperationException("oh no oopsie"));
