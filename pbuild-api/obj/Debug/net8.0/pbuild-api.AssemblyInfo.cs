@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("pbuild-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a5fc49de52ce3c30ff0f0c896562d17cf13cac5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5fa99e768d3683fbae200ff7e949f955342d279")]
 [assembly: System.Reflection.AssemblyProductAttribute("pbuild-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("pbuild-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

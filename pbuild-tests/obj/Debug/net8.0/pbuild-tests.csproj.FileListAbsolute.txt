@@ -158,3 +158,5 @@ C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-tests\obj\Debug\net8.0\pbuild-tests.pdb
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-tests\obj\Debug\net8.0\pbuild-tests.genruntimeconfig.cache
 C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-tests\obj\Debug\net8.0\ref\pbuild-tests.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-tests\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\Huijb\OneDrive\Bureaublad\Fontys\Semester 3 Deel 2\Individueel Project\pbuild-backend\pbuild-tests\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
