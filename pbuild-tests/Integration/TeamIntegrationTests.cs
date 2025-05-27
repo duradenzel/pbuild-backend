@@ -46,7 +46,7 @@ public class TeamIntegrationTests
 
         var teamInDb = context.Teams.Include(t => t.Pokemons).FirstOrDefault();
         Assert.NotNull(teamInDb);
-        Assert.Equal("Test Team", teamInDb.Name);
+        Assert.Equal("cool team", teamInDb.Name);
         Assert.Equal(2, teamInDb.Pokemons.Count);
     }
 
