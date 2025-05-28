@@ -1,4 +1,4 @@
-name: .NET Build and Test with Coverlet Coverage
+name: CI Pipeline
 
 on:
   push:
@@ -62,9 +62,3 @@ jobs:
       run: |
         dotnet sonarscanner end \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-
-    - name: Upload Coverage Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage
-        path: coverage.xml
