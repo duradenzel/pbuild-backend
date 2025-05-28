@@ -2,8 +2,6 @@ services:
   backend:
     image: lostborders/pbuild-api:latest
     network_mode: host
-    ports:
-      - 5286:5286
 
 
   watchtower:
