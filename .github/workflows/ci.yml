@@ -2,7 +2,7 @@ name: .NET Build and Test with Coverlet Coverage
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dev ]
   pull_request:
     branches: [ master ]
 
