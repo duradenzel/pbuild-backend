@@ -2,6 +2,7 @@ name: CI Pipeline
 
 on:
   push:
+    branches: [ master ]
     branches: [ dev ]
   pull_request:
     branches: [ master ]
@@ -48,57 +49,17 @@ jobs:
     - name: Build solution
       run: dotnet build pbuild.sln --configuration Release --no-incremental
 
-    - name: Debug - Show current directory and files before test
-      run: |
-        echo "Current directory: $(pwd)"
-        echo "Files in current directory:"
-        ls -la
-        echo "Test project location:"
-        find . -name "pbuild-tests.csproj" -type f
-
     - name: Run tests with Coverlet and collect coverage (OpenCover format)
       run: |
-        echo "Running tests with coverage..."
         coverlet ./pbuild-tests/bin/Release/net8.0/pbuild-tests.dll \
           --target "dotnet" \
           --targetargs "test ./pbuild-tests/pbuild-tests.csproj --no-build --configuration Release" \
           --format opencover \
-          --output coverage.xml \
-          --verbosity detailed
-
-    - name: Debug - Verify coverage file was created
-      run: |
-        echo "Current directory after test: $(pwd)"
-        echo "Files in current directory:"
-        ls -la
-        echo "Looking for coverage files:"
-        find . -name "coverage.xml" -type f
-        find . -name "*coverage*" -type f
-        if [ -f coverage.xml ]; then
-          echo "Coverage file found at root level"
-          echo "File size: $(stat -c%s coverage.xml) bytes"
-          echo "First 20 lines of coverage file:"
-          head -20 coverage.xml
-        else
-          echo "Coverage file NOT found at root level"
-        fi
+          --output coverage.xml
 
     - name: End SonarCloud analysis
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        echo "Starting SonarCloud end analysis..."
-        echo "Available coverage files:"
-        find . -name "*.xml" -type f | head -10
-        echo "Absolute path of coverage file:"
-        readlink -f coverage.xml
-        echo "SonarScanner working directory:"
-        pwd
         dotnet sonarscanner end \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-
-    - name: Upload Coverage Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage
-        path: coverage.xml
