@@ -23,10 +23,22 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Generate timestamp
+        id: timestamp
+        run: echo "timestamp=$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: lostborders/pbuild-api:latest
+          tags: |
+            lostborders/pbuild-api:latest
+            lostborders/pbuild-api:${{ steps.timestamp.outputs.timestamp }}
+            lostborders/pbuild-api:${{ github.sha }}
+          labels: |
+            com.centurylinklabs.watchtower.enable=true
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.created=${{ steps.timestamp.outputs.timestamp }}

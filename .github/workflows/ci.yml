@@ -37,12 +37,12 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        dotnet sonarscanner begin 
-          /k:"duradenzel_pbuild-backend" 
-          /o:"duradenzel" 
-          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" 
-          /d:sonar.host.url="https://sonarcloud.io" 
-          /d:sonar.cs.opencover.reportsPaths=coverage.xml
+        dotnet sonarscanner begin \
+          /k:"duradenzel_pbuild-backend" \
+          /o:"duradenzel" \
+          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
+          /d:sonar.host.url="https://sonarcloud.io" \
+          /d:sonar.cs.opencover.reportsPaths=coverage.xml\
 
 
     - name: Build solution
@@ -54,7 +54,7 @@ jobs:
           --target "dotnet" \
           --targetargs "test ./pbuild-tests/pbuild-tests.csproj --no-build --configuration Release" \
           --format opencover \
-          --output coverage.xml
+          --output coverage.xml \
 
     - name: End SonarCloud analysis
       env:
