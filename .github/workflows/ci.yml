@@ -2,7 +2,7 @@ name: .NET Build and Test with Coverlet Coverage
 
 on:
   push:
-    branches: [ dev, master ]
+    branches: [ dev ]
   pull_request:
     branches: [ master ]
 
@@ -50,11 +50,11 @@ jobs:
 
     - name: Run tests with Coverlet and collect coverage (OpenCover format)
       run: |
-        coverlet ./pbuild-tests/bin/Release/net8.0/pbuild-tests.dll 
-          --target "dotnet" 
-          --targetargs "test --no-build"
-          -f=opencover 
-          -o="coverage.xml"
+        coverlet ./pbuild-tests/bin/Release/net8.0/pbuild-tests.dll \
+          --target "dotnet" \
+          --targetargs "test ./pbuild-tests/pbuild-tests.csproj --no-build --configuration Release" \
+          --format opencover \
+          --output coverage.xml
 
     - name: End SonarCloud analysis
       env:
@@ -62,3 +62,9 @@ jobs:
       run: |
         dotnet sonarscanner end \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+    - name: Upload Coverage Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage
+        path: coverage.xml
