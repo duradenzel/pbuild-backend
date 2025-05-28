@@ -42,7 +42,7 @@ jobs:
           /o:"duradenzel" \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
           /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.cs.opencover.reportsPaths="**/coverage.xml" \
+          /d:sonar.cs.opencover.reportsPaths="coverage.xml" \
           /d:sonar.verbose=true
 
     - name: Build solution
@@ -90,6 +90,10 @@ jobs:
         echo "Starting SonarCloud end analysis..."
         echo "Available coverage files:"
         find . -name "*.xml" -type f | head -10
+        echo "Absolute path of coverage file:"
+        readlink -f coverage.xml
+        echo "SonarScanner working directory:"
+        pwd
         dotnet sonarscanner end \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
