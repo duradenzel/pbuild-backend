@@ -2,7 +2,7 @@ name: .NET Build and Test with Coverlet Coverage
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ dev, master ]
   pull_request:
     branches: [ master ]
 
@@ -37,24 +37,24 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
-        dotnet sonarscanner begin \
-          /k:"duradenzel_pbuild-backend" \
-          /o:"duradenzel" \
-          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
-          /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.cs.opencover.reportsPaths="coverage.xml" \
-          /d:sonar.verbose=true
+        dotnet sonarscanner begin 
+          /k:"duradenzel_pbuild-backend" 
+          /o:"duradenzel" 
+          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" 
+          /d:sonar.host.url="https://sonarcloud.io" 
+          /d:sonar.cs.opencover.reportsPaths=coverage.xml
+
 
     - name: Build solution
       run: dotnet build pbuild.sln --configuration Release --no-incremental
 
     - name: Run tests with Coverlet and collect coverage (OpenCover format)
       run: |
-        coverlet ./pbuild-tests/bin/Release/net8.0/pbuild-tests.dll \
-          --target "dotnet" \
-          --targetargs "test ./pbuild-tests/pbuild-tests.csproj --no-build --configuration Release" \
-          --format opencover \
-          --output coverage.xml
+        coverlet ./pbuild-tests/bin/Release/net8.0/pbuild-tests.dll 
+          --target "dotnet" 
+          --targetargs "test --no-build"
+          -f=opencover 
+          -o="coverage.xml"
 
     - name: End SonarCloud analysis
       env:
@@ -62,9 +62,3 @@ jobs:
       run: |
         dotnet sonarscanner end \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-
-    - name: Upload Coverage Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage
-        path: coverage.xml
