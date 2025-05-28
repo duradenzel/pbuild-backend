@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -42,11 +42,11 @@ jobs:
           /o:"duradenzel" \
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" \
           /d:sonar.host.url="https://sonarcloud.io" \
-          /d:sonar.cs.opencover.reportsPaths=coverage.xml\
-
+          /d:sonar.cs.opencover.reportsPaths="coverage.xml" \
+          /d:sonar.verbose=true
 
     - name: Build solution
-      run: dotnet build pbuild.sln --configuration Release --no-incremental
+      run: dotnet build pbuild.sln --configuration Release --no-restore
 
     - name: Run tests with Coverlet and collect coverage (OpenCover format)
       run: |
@@ -54,7 +54,7 @@ jobs:
           --target "dotnet" \
           --targetargs "test ./pbuild-tests/pbuild-tests.csproj --no-build --configuration Release" \
           --format opencover \
-          --output coverage.xml \
+          --output coverage.xml
 
     - name: End SonarCloud analysis
       env:
