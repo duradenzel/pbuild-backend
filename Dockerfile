@@ -2,18 +2,12 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /app
 
-# Copy only the project files first (better caching)
-COPY *.sln ./
-COPY pbuild-api/*.csproj ./pbuild-api/
-COPY pbuild-business/*.csproj ./pbuild-business/
-COPY pbuild-data/*.csproj ./pbuild-data/
-COPY pbuild-domain/*.csproj ./pbuild-domain/
+
+COPY . .
 
 # Restore dependencies
 RUN dotnet restore
 
-# Copy the rest of the source code
-COPY . .
 
 # Build and publish
 RUN dotnet publish pbuild-api/pbuild-api.csproj \
