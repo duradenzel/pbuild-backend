@@ -2,31 +2,24 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /app
 
-
 COPY . .
 
-# Restore dependencies
 RUN dotnet restore
 
-
-# Build and publish
 RUN dotnet publish pbuild-api/pbuild-api.csproj \
     --configuration Release \
     --no-restore \
     --output /app/publish
 
-# Runtime Stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
 WORKDIR /app
 
 COPY --from=build /app/publish .
 
-# Configure ASP.NET Core
 ENV ASPNETCORE_URLS=http://+:5286
 ENV ASPNETCORE_ENVIRONMENT=Production
 
-# Add Watchtower labels
 LABEL com.centurylinklabs.watchtower.enable=true
 
 EXPOSE 5286
