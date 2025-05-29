@@ -1,15 +1,19 @@
 services:
   backend:
     image: lostborders/pbuild-api:latest
-    network_mode: host
-
+    ports:
+      - "5286:5286"  # Put the port mapping back
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    restart: unless-stopped
 
   watchtower:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    
     environment:
-      WATCHTOWER_POLL_INTERVAL: "10"
+      WATCHTOWER_POLL_INTERVAL: "300"
       WATCHTOWER_DEBUG: "true"
       WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_LABEL_ENABLE: "true"
+    restart: unless-stopped
