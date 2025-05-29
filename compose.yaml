@@ -1,6 +1,7 @@
 services:
   mysql:
     image: mysql:8.0
+    network_mode: bridge
     environment:
       MYSQL_ROOT_PASSWORD: sickpassword
       MYSQL_DATABASE: pbuild_db
