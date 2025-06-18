@@ -97,7 +97,7 @@ jobs:
  
       - name: Run Tests with Coverage
         run: |
-          dotnet test ./pbuild-tests/pbuild-tests.csproj --configuration Release \
+          dotnet test pbuild-tests/pbuild-tests.csproj --configuration Release \
             --collect:"XPlat Code Coverage"
  
       - name: Locate Coverage File
