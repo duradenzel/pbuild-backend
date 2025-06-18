@@ -116,5 +116,5 @@ jobs:
  
       - name: Upload Coverage to Codacy
         env:
-          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_API_TOKEN }}
         run: ./codacy-coverage-reporter report -l CSharp -r "${{ env.COVERAGE_FILE }}"
